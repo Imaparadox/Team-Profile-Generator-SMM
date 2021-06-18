@@ -23,17 +23,17 @@ function createManager() {
             {
                 type: "input",
                 name: "managerName",
-                message: `What is your name?`
+                message: `What is your manager's name?`
             },
             {
                 type: "input",
                 name: "managerId",
-                message: `What is your id number?`
+                message: `What is your manager's id number?`
             },
             {
                 type: "input",
                 name: "managerEmail",
-                message: `What is your email?`,
+                message: `What is your manager's email?`,
                 validate: answer => {
                     const pass = answer.match(/\S+@\S+\.\S+/)
                     if (pass) {
@@ -44,7 +44,7 @@ function createManager() {
             {
                 type: "input",
                 name: "managerOfficeNumber",
-                message: `What is your office number?`
+                message: `What is your manager's office number?`
             }
         ])
         .then((answers) => {
@@ -86,17 +86,17 @@ function createEngineer() {
             {
                 type: "input",
                 name: "engineerName",
-                message: `What is your name?`
+                message: `What is your engineer's name?`
             },
             {
                 type: "input",
                 name: "engineerId",
-                message: `What is your id number?`
+                message: `What is your engineer's id number?`
             },
             {
                 type: "input",
                 name: "engineerEmail",
-                message: `What is your email?`,
+                message: `What is your engineer's email?`,
                 validate: answer => {
                     const pass = answer.match(/\S+@\S+\.\S+/)
                     if (pass) {
@@ -107,14 +107,13 @@ function createEngineer() {
             {
                 type: "input",
                 name: "engineerGithub",
-                message: `What is your Github username?`
+                message: `What is your engineer's Github username?`
             }
         ])
         .then((answers) => {
             const engineerObj = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub)
             teamMembersArr.push(engineerObj);
             createTeam();
-
         });
 };
 //Prompts user for information 
@@ -124,17 +123,17 @@ function createIntern() {
             {
                 type: "input",
                 name: "internName",
-                message: `What is your name?`
+                message: `What is your intern's name?`
             },
             {
                 type: "input",
                 name: "internId",
-                message: `What is your id number?`
+                message: `What is your intern's id number?`
             },
             {
                 type: "input",
                 name: "internEmail",
-                message: `What is your email?`,
+                message: `What is your intern's email?`,
                 validate: answer => {
                     const pass = answer.match(/\S+@\S+\.\S+/)
                     if (pass) {
@@ -145,7 +144,7 @@ function createIntern() {
             {
                 type: "input",
                 name: "internSchool",
-                message: `Which school did you attend?`
+                message: `Which school did your intern attend?`
             }
         ])
         .then((answers) => {
@@ -163,6 +162,8 @@ function buildTeamHtml() {
 };
 //Calls the function that creates the manager information
 createManager();
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
