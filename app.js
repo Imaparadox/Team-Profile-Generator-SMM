@@ -54,13 +54,6 @@ function createManager() {
 
             createTeam();
 
-        })
-        .catch((error) => {
-            if (error.isTtyError) {
-                // Prompt couldn't be rendered in the current environment
-            } else {
-                // Something else went wrong
-            }
         });
 };
 //Prompts user for information 
@@ -83,10 +76,9 @@ function createTeam() {
                     createIntern();
                     break;
                 default: buildTeamHtml();
-            }
-        })
-
-}
+            };
+        });
+};
 //Prompts user for information 
 function createEngineer() {
     inquirer
@@ -123,8 +115,8 @@ function createEngineer() {
             teamMembersArr.push(engineerObj);
             createTeam();
 
-        })
-}
+        });
+};
 //Prompts user for information 
 function createIntern() {
     inquirer
@@ -160,15 +152,15 @@ function createIntern() {
             const internObj = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool)
             teamMembersArr.push(internObj);
             createTeam();
-        })
-}
+        });
+};
 //Propagate HTML page based on user inputs
 function buildTeamHtml() {
     if (!fs.existsSync(OUTPUT_DIR)) {
-        fs.mkdirSync(OUTPUT_DIR)
+        fs.mkdirSync(OUTPUT_DIR);
     }
-    fs.writeFileSync(outputPath, render(teamMembersArr), 'utf8')
-}
+    fs.writeFileSync(outputPath, render(teamMembersArr), 'utf8');
+};
 //Calls the function that creates the manager information
 createManager();
 // After the user has input all employees desired, call the `render` function (required
