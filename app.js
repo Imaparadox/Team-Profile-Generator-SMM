@@ -32,7 +32,13 @@ function createManager() {
             {
                 type: "input",
                 name: "managerEmail",
-                message: `What is your email?`
+                message: `What is your email?`,
+                validate: answer => {
+                    const pass = answer.match(/\S+@\S+\.\S+/)
+                    if (pass) {
+                        return true;
+                    } return "Enter a valid email address";
+                }
             },
             {
                 type: "input",
@@ -97,7 +103,13 @@ function createEngineer() {
             {
                 type: "input",
                 name: "engineerEmail",
-                message: `What is your email?`
+                message: `What is your email?`,
+                validate: answer => {
+                    const pass = answer.match(/\S+@\S+\.\S+/)
+                    if (pass) {
+                        return true;
+                    } return "Enter a valid email address";
+                }
             },
             {
                 type: "input",
@@ -129,16 +141,22 @@ function createIntern() {
             {
                 type: "input",
                 name: "internEmail",
-                message: `What is your email?`
+                message: `What is your email?`,
+                validate: answer => {
+                    const pass = answer.match(/\S+@\S+\.\S+/)
+                    if (pass) {
+                        return true;
+                    } return "Enter a valid email address";
+                }
             },
             {
                 type: "input",
-                name: "internGithub",
-                message: `What is your Github username?`
+                name: "internSchool",
+                message: `Which school did you attend?`
             }
         ])
         .then((answers) => {
-            const internObj = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internGithub)
+            const internObj = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool)
             teamMembersArr.push(internObj);
             createTeam();
         })
