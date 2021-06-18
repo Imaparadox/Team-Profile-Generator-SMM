@@ -4,16 +4,146 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+// const inquirer = require('inquirer');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//Empty Array
+const teamMembersArr = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+function createManager() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "managerName",
+                message: `What is your name?`
+            },
+            {
+                type: "input",
+                name: "managerId",
+                message: `What is your id number?`
+            },
+            {
+                type: "input",
+                name: "managerEmail",
+                message: `What is your email?`
+            },
+            {
+                type: "input",
+                name: "managerOfficeNumber",
+                message: `What is your office number?`
+            }
+        ])
+        .then((answers) => {
+            const managerObj = new Manager(answers.managerName, answers.managerId, answers.managerEmail,
+                answers.managerOfficeNumber)
+            teamMembersArr.push(managerObj);
 
+            createTeam();
+
+        })
+        .catch((error) => {
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            } else {
+                // Something else went wrong
+            }
+        });
+};
+
+function createTeam() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "teamMemberChoice",
+                message: `What team member would you like to add?`,
+                choices: ['Engineer', 'Intern', `I don't have any team members to add.`]
+            }
+        ])
+        .then((answer) => {
+            switch (answer.teamMemberChoice) {
+                case 'Engineer':
+                     createEngineer(); 
+                    break;
+                case 'Intern':
+                    //createIntern();
+                    break;
+                // default: buildTeamHtml();
+            }
+        })
+        
+}
+
+function createEngineer() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "engineerName",
+                message: `What is your name?`
+            },
+            {
+                type: "input",
+                name: "engineerId",
+                message: `What is your id number?`
+            },
+            {
+                type: "input",
+                name: "engineerEmail",
+                message: `What is your email?`
+            },
+            {
+                type: "input",
+                name: "engineerGithub",
+                message: `What is your Github username?`
+            }
+        ])
+        .then((answers) => {
+            const engineerObj = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub)
+            teamMembersArr.push(engineerObj);
+            createTeam();
+    
+        })
+}
+
+function createIntern () {
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "internName",
+            message: `What is your name?`
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: `What is your id number?`
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: `What is your email?`
+        },
+        {
+            type: "input",
+            name: "internGithub",
+            message: `What is your Github username?`
+        }
+    ])
+    const internObj = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internGithub)
+    teamMembersArr.push(internObj);
+    createTeam();
+}
+
+
+createManager();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
