@@ -70,15 +70,15 @@ function createTeam() {
         .then((answer) => {
             switch (answer.teamMemberChoice) {
                 case 'Engineer':
-                     createEngineer(); 
+                    createEngineer();
                     break;
                 case 'Intern':
-                    //createIntern();
+                    createIntern();
                     break;
-                // default: buildTeamHtml();
+                default: buildTeamHtml();
             }
         })
-        
+
 }
 
 function createEngineer() {
@@ -109,39 +109,47 @@ function createEngineer() {
             const engineerObj = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub)
             teamMembersArr.push(engineerObj);
             createTeam();
-    
+
         })
 }
 
-function createIntern () {
+function createIntern() {
     inquirer
-    .prompt([
-        {
-            type: "input",
-            name: "internName",
-            message: `What is your name?`
-        },
-        {
-            type: "input",
-            name: "internId",
-            message: `What is your id number?`
-        },
-        {
-            type: "input",
-            name: "internEmail",
-            message: `What is your email?`
-        },
-        {
-            type: "input",
-            name: "internGithub",
-            message: `What is your Github username?`
-        }
-    ])
-    const internObj = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internGithub)
-    teamMembersArr.push(internObj);
-    createTeam();
+        .prompt([
+            {
+                type: "input",
+                name: "internName",
+                message: `What is your name?`
+            },
+            {
+                type: "input",
+                name: "internId",
+                message: `What is your id number?`
+            },
+            {
+                type: "input",
+                name: "internEmail",
+                message: `What is your email?`
+            },
+            {
+                type: "input",
+                name: "internGithub",
+                message: `What is your Github username?`
+            }
+        ])
+        .then((answers) => {
+            const internObj = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internGithub)
+            teamMembersArr.push(internObj);
+            createTeam();
+        })
 }
 
+function buildTeamHtml() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(teamMembersArr), 'utf8')
+}
 
 createManager();
 // After the user has input all employees desired, call the `render` function (required
