@@ -1,21 +1,22 @@
+//Global scope variables
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-// const inquirer = require('inquirer');
 
+//Output directory
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+//Creates HTML
 const render = require("./lib/htmlRenderer");
 
 //Empty Array
 const teamMembersArr = [];
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+//Prompts user for information 
 function createManager() {
     inquirer
         .prompt([
@@ -62,7 +63,7 @@ function createManager() {
             }
         });
 };
-
+//Prompts user for information 
 function createTeam() {
     inquirer
         .prompt([
@@ -86,7 +87,7 @@ function createTeam() {
         })
 
 }
-
+//Prompts user for information 
 function createEngineer() {
     inquirer
         .prompt([
@@ -124,7 +125,7 @@ function createEngineer() {
 
         })
 }
-
+//Prompts user for information 
 function createIntern() {
     inquirer
         .prompt([
@@ -161,14 +162,14 @@ function createIntern() {
             createTeam();
         })
 }
-
+//Propagate HTML page based on user inputs
 function buildTeamHtml() {
     if (!fs.existsSync(OUTPUT_DIR)) {
         fs.mkdirSync(OUTPUT_DIR)
     }
     fs.writeFileSync(outputPath, render(teamMembersArr), 'utf8')
 }
-
+//Calls the function that creates the manager information
 createManager();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
