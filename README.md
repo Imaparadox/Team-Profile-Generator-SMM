@@ -30,10 +30,13 @@ To start the application, the user is prompted to enter the team manager's name,
 
 ## Usage 
 
-![ScreenShot](assets/images/Dashboard_without_info.png "ScreenShot")
+### Full Page
+![ScreenShot](assets/images/Team-Memeber-Generator-Main.png "ScreenShot")
+
+### Demo
 
 ## Notes
-Blah blah blah
+This projects used OOP and TDD to develop this web application. Each test passed successful to ensure a smooth user experience. Looking forward to using these methods for future development.
 
 ## Contributions
 N/A
