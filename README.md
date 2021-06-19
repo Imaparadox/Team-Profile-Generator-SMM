@@ -18,7 +18,7 @@ To start the application, the user is prompted to enter the team manager's name,
 
 ## Deploy
 
-[github page site] https://imaparadox.github.io/Team-Profile-Generator-SMM/
+This webpage is generated via the command-line based on user inputs.
 
 ## Technologies Used
 
